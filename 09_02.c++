@@ -5,11 +5,11 @@ using namespace std;
 
 class Matrix {
 	private:
-		int row;
-		int column;
-		unsigned long long int array[MAXSIZE][MAXSIZE];
+		unsigned long long  row;
+		unsigned long long  column;
+		 unsigned long long array[MAXSIZE][MAXSIZE];
 	public:	
-		Matrix(int r, int c) {
+		Matrix(unsigned long long  r, unsigned long long  c) {
 			if (r > MAXSIZE || c > MAXSIZE) {
 				cout << "Wrong" << endl;
 				r = 0;
@@ -17,15 +17,15 @@ class Matrix {
 			}
 			row = r;
 			column = c;
-			for (int i = 0; i < row; i ++) {
-				for (int j = 0; j < column; j ++) {
+			for (unsigned long long  i = 0; i < row; i ++) {
+				for (unsigned long long  j = 0; j < column; j ++) {
 					cin >> array[i][j];
 				}
 			}
 
 		}
 
-		Matrix(int r, int c, int a) {
+		Matrix(unsigned long long  r, unsigned long long  c, unsigned long long  a) {
 			if (r > MAXSIZE || c > MAXSIZE) {
 				cout << "Wrong" << endl;
 				r = 0;
@@ -34,8 +34,8 @@ class Matrix {
 			row = r;
 			column = c;
 			
-			for (int i = 0; i < row; i ++) {
-				for (int j = 0; j < column; j ++) {
+			for (unsigned long long  i = 0; i < row; i ++) {
+				for (unsigned long long  j = 0; j < column; j ++) {
 					array[i][j] = a;
 				}
 			}
@@ -46,8 +46,8 @@ class Matrix {
 			row = m.row;
 			column = m.column;
 			
-			for (int i = 0; i < row; i ++) {
-				for (int j = 0; j < column; j ++) {
+			for (unsigned long long  i = 0; i < row; i ++) {
+				for (unsigned long long  j = 0; j < column; j ++) {
 					array[i][j] = m.array[i][j];
 				}
 			}
@@ -61,8 +61,8 @@ class Matrix {
 			row = m.row;
 			column = m.column;
 			
-			for (int i = 0; i < row; i ++) {
-				for (int j = 0; j < column; j ++) {
+			for (unsigned long long  i = 0; i < row; i ++) {
+				for (unsigned long long  j = 0; j < column; j ++) {
 					array[i][j] = m.array[i][j];
 				}
 			}
@@ -76,10 +76,10 @@ class Matrix {
 				return Matrix(1, 1, -1);
 			}
 			Matrix ans(row, m.column, 0);
-			for (int i = 0; i < ans.row; i ++) {
-				for (int j = 0; j < ans.column; j ++) {
-					int temp = 0;
-					for (int k = 0; k < ans.row; k ++) {
+			for (unsigned long long  i = 0; i < ans.row; i ++) {
+				for (unsigned long long  j = 0; j < ans.column; j ++) {
+					unsigned long long  temp = 0;
+					for (unsigned long long  k = 0; k < ans.row; k ++) {
 						temp += this->array[i][k] * m.array[k][j];	
 					}
 					ans.array[i][j] = temp;
@@ -89,13 +89,13 @@ class Matrix {
 			return ans;
 		}
 
-		Matrix operator ^ (int n) const {
+		Matrix operator ^ (unsigned long long  n) const {
 			if (n <= 0) {
 				cout << "Wrong!" << endl;
 				return Matrix(1, 1, -1);
 			}
 			Matrix ans = *this;
-			for (int i = 1; i < n; i ++) {
+			for (unsigned long long  i = 1; i < n; i ++) {
 				ans = ans * (*this);
 			}
 			return ans;
@@ -104,15 +104,15 @@ class Matrix {
 		void print() {
 			cout << "row: " << row << endl;
 			cout << "column: " << column << endl;
-			for (int i = 0; i < row; i ++) {
-				for (int j = 0; j < column; j ++) {
+			for (unsigned long long  i = 0; i < row; i ++) {
+				for (unsigned long long  j = 0; j < column; j ++) {
 					cout << array[i][j] << " "; 
 				}
 				cout << endl;
 			}
 		}
 
-		unsigned long long int get(int i, int j){
+		 unsigned long long get(unsigned long long  i, unsigned long long  j){
 			if (i < 0 || j < 0 || i >= row || j >= column) {
 				cout << "Wrong input!" << endl;
 				return -1;
@@ -122,7 +122,7 @@ class Matrix {
 
 };
 
-Matrix FastPower(const Matrix & m, int n) {
+Matrix FastPower(const Matrix & m, unsigned long long  n) {
 	if (n == 1) {
 		return m;
 	}
@@ -134,7 +134,7 @@ Matrix FastPower(const Matrix & m, int n) {
 }
 
 Matrix m = Matrix(2, 2); //在此我们输入 1,1,1,0 初始化这个矩阵
-unsigned long long int Fibonacci(int n) {
+ unsigned long long Fibonacci(unsigned long long  n) {
 	if (n <= 0) return 0;
 	if (n == 1) return 1;	
 	Matrix m1 = m;
@@ -142,10 +142,10 @@ unsigned long long int Fibonacci(int n) {
 	return m1.get(0, 0); //为f(n)
 }
 
-//怎么突破int呢？
+//怎么突破unsigned long long 呢？
 
 int main() {
-	for(int i = 0; i < 48; i ++)
+	for(unsigned long long  i = 0; i < 100; i ++)
 		cout << i << ": " << Fibonacci(i) << endl;
 
 }
