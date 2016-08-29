@@ -1,4 +1,5 @@
 # include <iostream>
+# include <cstdlib>
 # define MAXSIZE 2
 using namespace std;
 
@@ -6,7 +7,7 @@ class Matrix {
 	private:
 		int row;
 		int column;
-		int array[MAXSIZE][MAXSIZE];
+		unsigned long long int array[MAXSIZE][MAXSIZE];
 	public:	
 		Matrix(int r, int c) {
 			if (r > MAXSIZE || c > MAXSIZE) {
@@ -16,7 +17,6 @@ class Matrix {
 			}
 			row = r;
 			column = c;
-			
 			for (int i = 0; i < row; i ++) {
 				for (int j = 0; j < column; j ++) {
 					cin >> array[i][j];
@@ -112,7 +112,7 @@ class Matrix {
 			}
 		}
 
-		int get(int i, int j){
+		unsigned long long int get(int i, int j){
 			if (i < 0 || j < 0 || i >= row || j >= column) {
 				cout << "Wrong input!" << endl;
 				return -1;
@@ -122,11 +122,30 @@ class Matrix {
 
 };
 
+Matrix FastPower(const Matrix & m, int n) {
+	if (n == 1) {
+		return m;
+	}
+	if (n % 2 == 0) {
+		return FastPower(m, n/2) * FastPower(m, n/2);
+	} else {
+		return FastPower(m, (n - 1)/2) * FastPower(m, (n - 1)/2) * m;
+	}
+}
+
+Matrix m = Matrix(2, 2); //在此我们输入 1,1,1,0 初始化这个矩阵
+unsigned long long int Fibonacci(int n) {
+	if (n <= 0) return 0;
+	if (n == 1) return 1;	
+	Matrix m1 = m;
+	m1 = FastPower(m1, n-1);
+	return m1.get(0, 0); //为f(n)
+}
+
+//怎么突破int呢？
 
 int main() {
-	
-	// Matrix m1 = Matrix(2, 2);
-	// Matrix ans = m1^2;
-	// ans.print();
+	for(int i = 0; i < 48; i ++)
+		cout << i << ": " << Fibonacci(i) << endl;
 
 }
