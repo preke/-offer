@@ -9,34 +9,43 @@ using namespace std;
 //还是有bug
 //明天再试试，想不出来，就用书上的方法
 char array[MAXN];
-void printArray() {
+void printArray(int length) {
 	int index = 0;
-	while(array[MAXN - 1 - index] != '0' ) {
-		index ++;
+	for (int i = 0; i < length; i ++) {
+		if (array[i] != '0') {
+			index = i;
+			break;
+		}	
 	}
-	for (int i = MAXN - index; i < MAXN; i ++) {
+	for (int i = index; i < length; i ++)
 		cout << array[i];
+
+	cout << endl;
+}
+
+void printRecurisively(int length, int index) {
+	if (index == length - 1) {
+		printArray(length);
+		return;
 	}
-	//cout << endl;
+	for (char ch = '0'; ch <= '9'; ch ++) {
+		array[index + 1] = ch;
+		printRecurisively(length, index + 1);
+	}
 }
 
 void Print1ToMaxOfDigits(int n) {
-	if (n <= 0) {
-		printArray();
+	if (n <= 0) return;
+	for (char ch = '0'; ch <= '9'; ch ++) {
+		array[0] = ch;
+		printRecurisively(n, 0);
 	}
-	for (int i = 0; i < n; i ++) {
-		for (char ch = '1'; ch <= '9'; ch ++) {
-			array[MAXN - 1 - i] = ch;
-			Print1ToMaxOfDigits(n - 1);
-		}
-	}
- 	
 }
 
 int main(){
-	memset(array, '0', MAXN);
 	int i;
 	while(cin >> i) {
+		memset(array, '0', MAXN);
 		Print1ToMaxOfDigits(i);
 		memset(array, '0', MAXN);
 	}
